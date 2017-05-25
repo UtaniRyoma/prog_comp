@@ -8,9 +8,9 @@ class App(QDialog):
     def __init__(self):
         super().__init__()
         self.title = 'Choice for vote'
-        self.left = 10
-        self.top = 10
-        self.width = 320
+        self.left = 30
+        self.top = 30
+        self.width = 900
         self.height = 100
         self.initUI()
  
@@ -27,10 +27,11 @@ class App(QDialog):
         self.show()
  
     def createHorizontalLayout(self):
+        theme="test"
         self.horizontalGroupBox = QGroupBox("%s"%theme)
         layout = QHBoxLayout()
-
-	choiceslist=choices.split(','maxsplit=3)
+        choices="a,b,c,d"
+        choiceslist=choices.split(',')
  
         buttonChoice1 = QPushButton('%s'%choiceslist[0], self)
         buttonChoice1.clicked.connect(self.on_click_choice1)
@@ -44,7 +45,7 @@ class App(QDialog):
         buttonChoice3.clicked.connect(self.on_click_choice3)
         layout.addWidget(buttonChoice3) 
 
-	buttonChoice4 = QPushButton('%s'%choiceslist[3], self)
+        buttonChoice4 = QPushButton('%s'%choiceslist[3], self)
         buttonChoice4.clicked.connect(self.on_click_choice4)
         layout.addWidget(buttonChoice4) 
  
