@@ -13,6 +13,12 @@ class ServerSocket:
         else:
             self.serversock = serversock
 
+    def setPort(self, port):
+        self.port = port
+
+    def getPort(self, port):
+        return self.port
+
     def bindsock(self, listen = 10):
         self.serversock.bind((self.server, self.port))
         self.serversock.listen(listen)
@@ -32,3 +38,28 @@ class ServerSocket:
                 except :
                     socket.close()
                     self.socklist.remove(socket)
+
+
+class Client:
+    def __init__(self, user_name, host_name = '127.0.0.1', port = 5001):
+        self.user = user_name
+        self.host = host_name
+        self.port = port
+
+    def setUser(self, user_name):
+        self.user = user_name
+
+    def getUser(self):
+        return self.user
+
+    def setHost(self, host_name):
+        self.host = host_name
+
+    def getHost(self):
+        return self.host
+
+    def setPort(self, port):
+        self.port = port
+
+    def getPort(self):
+        return self.port
