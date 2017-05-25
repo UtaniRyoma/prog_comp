@@ -1,9 +1,14 @@
 import sys, socket, select
 from socket_lib import ServerSocket
+from db_lib import getPort
 
 if __name__ == '__main__':
     # server = ServerSocket(5001)
-    server = ServerSocket(5001, , '127.0.0.1')
+    if sys.argv[1] == None:
+        port = None
+    else:
+        port = getPort(sys.argv[1])
+    server = ServerSocket(port, [], '127.0.0.1')
     server.bindsock(10)
     server.appendsock()
     print('Start')

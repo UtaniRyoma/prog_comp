@@ -1,4 +1,5 @@
 import sys, socket, select, threading
+from db_lib import getPort
 from socket_lib import Client
 
 def prompt(user) :
@@ -6,10 +7,15 @@ def prompt(user) :
     sys.stdout.flush()
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
+    if len(sys.argv) < 3:
         print('Usage : python %s user host' % sys.argv[0])
         sys.exit()
     client = Client(sys.argv[1], '127.0.0.1')
+    # client = Client(sys.argv[1], socket.gethostname())
+
+    port = getPort(sys.argv[2], client.getUser())
+    if port != None:
+        client.setPort(port)
     server_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try :
         server_sock.connect((client.getHost(), client.getPort()))
