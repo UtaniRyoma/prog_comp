@@ -2,7 +2,8 @@ import sys, socket, select
 from socket_lib import ServerSocket
 
 if __name__ == '__main__':
-    server = ServerSocket(5001, [], '127.0.0.1')
+    # server = ServerSocket(5001)
+    server = ServerSocket(5001, , '127.0.0.1')
     server.bindsock(10)
     server.appendsock()
     print('Start')

@@ -2,7 +2,7 @@ import sys, socket, select
 
 class ServerSocket:
     """Deal server sockert with not a main function but an object"""
-    def __init__(self, port = 5001,  socklist = [], server = '127.0.0.1', serversock = None):
+    def __init__(self, port = 5001,  socklist = [], server = socket.gethostname(), serversock = None):
 #    def __init__(self, port = 5001,  socklist = [], server = socket.gethostname()):
         # create an INET, STREAMing socket
         self.port = port
@@ -41,7 +41,7 @@ class ServerSocket:
 
 
 class Client:
-    def __init__(self, user_name, host_name = '127.0.0.1', port = 5001):
+    def __init__(self, user_name, host_name = socket.gethostname(), port = 5001):
         self.user = user_name
         self.host = host_name
         self.port = port

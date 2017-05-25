@@ -9,7 +9,7 @@ if __name__ == "__main__":
     if len(sys.argv) < 2:
         print('Usage : python %s user host' % sys.argv[0])
         sys.exit()
-    client = Client(sys.argv[1])
+    client = Client(sys.argv[1], '127.0.0.1')
     server_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try :
         server_sock.connect((client.getHost(), client.getPort()))
