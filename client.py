@@ -1,6 +1,4 @@
 import sys, socket, select, threading
-from db_lib import getPort
-from socket_lib import Client
 
 def prompt(user) :
     sys.stdout.write('%s> ' % user)
@@ -10,15 +8,10 @@ if __name__ == "__main__":
     if len(sys.argv) < 3:
         print('Usage : python %s user host' % sys.argv[0])
         sys.exit()
-    client = Client(sys.argv[1], '127.0.0.1')
-    # client = Client(sys.argv[1], socket.gethostname())
-
-    port = getPort(sys.argv[2], client.getUser())
-    if port != None:
-        client.setPort(port)
+    (user, host), port = sys.argv[1:3], 5001
     server_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try :
-        server_sock.connect((client.getHost(), client.getPort()))
+        server_sock.connect((host, port))
     except :
         print('Unable to connect')
         sys.exit()
@@ -31,18 +24,18 @@ if __name__ == "__main__":
             except:
                 break
             sys.stdout.write('\r%s\n' % data)
-            prompt(client.getUser())
+            prompt(user)
         print('\rTerminated')
     t = threading.Thread(target=listen)
     t.start()
-    prompt(client.getUser())
+    prompt(user)
     while True:
         msg = sys.stdin.readline().strip()
         if not msg:
             server_sock.close()
             break
         try:
-            server_sock.send(('%s| %s' % (client.getUser(), msg)).encode())
+            server_sock.send(('%s| %s' % (user, msg)).encode())
         except:
             break
-        prompt(client.getUser())
+        prompt(user)
