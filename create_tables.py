@@ -16,4 +16,11 @@ if cur.fetchone() == None:
     cur.execute(sql)
     db.commit()
 
+# Create Member Table
+cur = db.execute("SELECT * FROM sqlite_master WHERE type = 'table' and name = 'members' ")
+if cur.fetchone() == None:
+    sql = "CREATE TABLE members(group_name verchar(50), user_name verchar(50))"
+    cur.execute(sql)
+    db.commit()
+
 db.close()
